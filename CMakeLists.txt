@@ -28,11 +28,9 @@ include_directories(include)
 
 add_executable(template.elf source/template.c)
 target_link_libraries(template.elf mm gba)
-add_custom_command(TARGET template.elf
-    POST_BUILD
-    COMMAND ${DEVKITARM}/bin/arm-none-eabi-objcopy -O binary $<TARGET_FILE:template.elf> template.gba
-)
-add_custom_command(TARGET template.elf
-    POST_BUILD
-    COMMAND ${DEVKITPRO}/tools/bin/gbafix template.gba
+
+add_custom_target(template.gba
+    BYPRODUCTS template.gba
+    COMMAND ${DEVKITARM}/bin/arm-none-eabi-objcopy -O binary $<TARGET_FILE:template.elf> template.gba && ${DEVKITPRO}/tools/bin/gbafix template.gba
+    DEPENDS template.elf
 )
