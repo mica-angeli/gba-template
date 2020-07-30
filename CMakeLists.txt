@@ -26,11 +26,11 @@ link_directories(${DEVKITPRO}/libgba/lib)
 
 include_directories(include)
 
-add_executable(template.elf src/main.c)
-target_link_libraries(template.elf mm gba)
+add_executable(${PROJECT_NAME}.elf src/main.c)
+target_link_libraries(${PROJECT_NAME}.elf mm gba)
 
-add_custom_target(template.gba
-    BYPRODUCTS template.gba
-    COMMAND ${DEVKITARM}/bin/arm-none-eabi-objcopy -O binary $<TARGET_FILE:template.elf> template.gba && ${DEVKITPRO}/tools/bin/gbafix template.gba
-    DEPENDS template.elf
+add_custom_target(${PROJECT_NAME}.gba
+    BYPRODUCTS ${PROJECT_NAME}.gba
+    COMMAND ${DEVKITARM}/bin/arm-none-eabi-objcopy -O binary $<TARGET_FILE:${PROJECT_NAME}.elf> ${PROJECT_NAME}.gba && ${DEVKITPRO}/tools/bin/gbafix ${PROJECT_NAME}.gba
+    DEPENDS ${PROJECT_NAME}.elf
 )
