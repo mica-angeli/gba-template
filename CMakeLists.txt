@@ -1,8 +1,15 @@
 cmake_minimum_required(VERSION 3.10)
 project(gba_template)
 
-set(DEVKITPRO "/opt/devkitpro")
-set(DEVKITARM "${DEVKITPRO}/devkitARM")
+set(DEVKITPRO "$ENV{DEVKITPRO}")
+if(NOT IS_DIRECTORY ${DEVKITPRO})
+    message(FATAL_ERROR "Please set DEVKITPRO in your environment")
+endif()
+
+set(DEVKITARM "$ENV{DEVKITARM}")
+if(NOT IS_DIRECTORY ${DEVKITARM})
+    message(FATAL_ERROR "Please set DEVKITARM in your environment")
+endif()
 
 if(WIN32)
     set(CMAKE_C_COMPILER "${DEVKITARM}/bin/arm-none-eabi-gcc.exe")
