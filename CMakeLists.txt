@@ -26,7 +26,7 @@ link_directories(${DEVKITPRO}/libgba/lib)
 
 include_directories(include)
 
-add_executable(template.elf source/template.c)
+add_executable(template.elf src/main.c)
 target_link_libraries(template.elf mm gba)
 
 add_custom_target(template.gba
